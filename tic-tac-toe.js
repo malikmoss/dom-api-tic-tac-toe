@@ -2,11 +2,12 @@ let currentPlayerSymbol = "X"
 let squareValues =  ["","","","","","","","",""]
 
 window.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('tic-tac-toe-board').addEventListener('click', event => {
-        console.log('A square is clicked:', e.target.id)
+    document.getElementById('tic-tac-toe-board').addEventListener('click', e => {
+        // console.log('A square is clicked:', e.target.id)
+        
         const targetId = e.target.id;
 
-        if(!target.startsWith('square-')) return;
+        if(!targetId.startsWith('square-')) return;
 
         const squareIndex = Number.parseInt(targetId[targetId.length - 1])
 
@@ -18,7 +19,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         squareValues[squareIndex] = currentPlayerSymbol;
 
-        if (currentpLAYERsYMBOL ==='X') {
+        if (currentPlayerSymbol === 'X') {
             currentPlayerSymbol = 'O';
         } else {
             currentPlayerSymbol = 'X'
