@@ -1,53 +1,58 @@
 let currentPlayerSymbol = "X"
+                    //s0 s1 s2...            s8
 let squareValues =  ["","","","","","","","",""]
 let gameStatus = ''
 
 function checkGameStatus() {
-    
+
+// Check rows
     for(let i = 0; i < 9; i += 3) {
         if (squareValues[i] !== ''
               && squareValues[i] === squareValues[i + 1]
               && squareValues[i] === squareValues[i + 2]){
-          gamesStatus = squareValues[i];
+          gameStatus = squareValues[i];
           break;
         }
     }
 
+// Check columns
     for(let i = 0; i < 3; i += 1) {
         if (squareValues[i] !== ''
             && squareValues[i] === squareValues[i + 3]
             && squareValues[i] === squareValues[i + 6]){
-          gamesStatus = squareValues[i];
+          gameStatus = squareValues[i];
           break;
         }
     }
 
+// Check diagonals
     if (squareValues[0] !== ''
             && squareValues[0] === squareValues[4]
             && squareValues[0] === squareValues[8]){
-          gamesStatus = squareValues[0];
+          gameStatus = squareValues[0];
         }
 
     if (squareValues[2] !== ''
             && squareValues[2] === squareValues[4]
             && squareValues[2] === squareValues[6]){
-          gamesStatus = squareValues[2];
+          gameStatus = squareValues[2];
         }
 
+// Check for a tie
     let boardIsFilled = true;
     for(let i=0; i < 9; i += 1) {
         if (squareValues[i] === '') {
             boardIsFilled = false;
             break;
         }
-        if (boardIsFilled) {
-            gameStatus = 'None'
-        }
+    }
+    if (boardIsFilled) {
+        gameStatus = 'None'
     }
 
     if (gameStatus !== '') {
         document
-            .getElementById('game-status-message')
+            .getElementById('game-status')
             .innerHTML = `Winner: ${gameStatus.toUpperCase()}`
     }
 }
@@ -76,5 +81,7 @@ window.addEventListener('DOMContentLoaded', () => {
         } else {
             currentPlayerSymbol = 'X'
         }
+
+        checkGameStatus()
     });
 });
