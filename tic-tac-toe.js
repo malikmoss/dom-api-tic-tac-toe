@@ -53,7 +53,11 @@ function checkGameStatus() {
     if (gameStatus !== '') {
         document
             .getElementById('game-status')
-            .innerHTML = `Winner: ${gameStatus.toUpperCase()}`
+            .innerHTML = `Winner: ${gameStatus.toUpperCase()}`;
+
+        document
+            .getElementById('new-game')
+            .disabled = false;
     }
 }
 
@@ -84,4 +88,20 @@ window.addEventListener('DOMContentLoaded', () => {
 
         checkGameStatus()
     });
+
+    document.getElementById('new-game').addEventListener('click', () => {
+        gameStatus = ''
+        document
+            .getElementById('game-status')
+            .innerHTML = '';
+
+        for(let i = 0; i < 9; i++) {
+            document.getElementById('square-${i}').innerHTML = ''
+        }
+        currentPlayerSymbol = 'X'
+        document
+        .getElementById('new-game')
+        .disabled = true;
+        squareValues = ["","","","","","","","",""]
+    })
 });
