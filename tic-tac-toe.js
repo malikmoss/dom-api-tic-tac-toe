@@ -96,7 +96,7 @@ window.addEventListener('DOMContentLoaded', () => {
             .innerHTML = '';
 
         for(let i = 0; i < 9; i++) {
-            document.getElementById('square-${i}').innerHTML = ''
+            document.getElementById(`square-${i}`).innerHTML = ''
         }
         currentPlayerSymbol = 'X'
         document
