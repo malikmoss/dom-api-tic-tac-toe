@@ -3,7 +3,7 @@ let currentPlayerSymbol = "X"
 let squareValues =  ["","","","","","","","",""]
 let gameStatus = ''
 
-function saveGameStatus() {
+function saveGameState() {
     const state = {
         currentPlayerSymbol,
         squareValues,
@@ -13,7 +13,7 @@ function saveGameStatus() {
 
 }
 
-function localGameState() {
+function loadGameState() {
     const savedState = window.localStorage.getItem(key);
     if (savedState === null) return;
 
@@ -43,6 +43,18 @@ function localGameState() {
         document
             .getElementById('give-up')
             .disabled = true;
+    } else {
+        document
+        .getElementById('game-status')
+        .innerHTML = '';
+
+    document
+        .getElementById('new-game')
+        .disabled = true;
+
+    document
+        .getElementById('give-up')
+        .disabled = false; 
     }
 }
 
@@ -109,6 +121,8 @@ function checkGameStatus() {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+    loadGameState();
+
     document.getElementById('tic-tac-toe-board').addEventListener('click', e => {
         
         const targetId = e.target.id;
@@ -133,7 +147,8 @@ window.addEventListener('DOMContentLoaded', () => {
             currentPlayerSymbol = 'X'
         }
 
-        checkGameStatus()
+        checkGameStatus();
+        saveGameState();
     });
 
     document.getElementById('new-game').addEventListener('click', () => {
@@ -156,6 +171,7 @@ window.addEventListener('DOMContentLoaded', () => {
         document
             .getElementById('give-up')
             .disabled = false;
+    saveGameState()
     })
 
     document.getElementById('give-up').addEventListener('click', () => {
@@ -176,5 +192,7 @@ window.addEventListener('DOMContentLoaded', () => {
         document
             .getElementById('new-game')
             .disabled = false;
+
+    saveGameState()
     })
 });
