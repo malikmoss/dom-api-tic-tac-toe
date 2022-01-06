@@ -58,6 +58,10 @@ function checkGameStatus() {
         document
             .getElementById('new-game')
             .disabled = false;
+
+        document
+            .getElementById('give-up')
+            .disabled = true;
     }
 }
 
@@ -103,5 +107,12 @@ window.addEventListener('DOMContentLoaded', () => {
         .getElementById('new-game')
         .disabled = true;
         squareValues = ["","","","","","","","",""]
+    })
+
+    document.getElementById('give-up').addEventListener('click', () => {
+        gameStatus = ''
+        document
+            .getElementById('give-up')
+            .disabled = false;
     })
 });
