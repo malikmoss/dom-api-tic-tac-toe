@@ -102,17 +102,36 @@ window.addEventListener('DOMContentLoaded', () => {
         for(let i = 0; i < 9; i++) {
             document.getElementById(`square-${i}`).innerHTML = ''
         }
+        
         currentPlayerSymbol = 'X'
+        
         document
-        .getElementById('new-game')
-        .disabled = true;
+            .getElementById('new-game')
+            .disabled = true;
         squareValues = ["","","","","","","","",""]
+
+        document
+            .getElementById('give-up')
+            .disabled = false;
     })
 
     document.getElementById('give-up').addEventListener('click', () => {
-        gameStatus = ''
+        
+        if (currentPlayerSymbol === 'X') {
+            gameStatus = 'O'
+        } else {
+            gameStatus = 'X'
+        }
+        document
+            .getElementById('game-status')
+            .innerHTML = `Winner: ${gameStatus.toUpperCase()}`
+
         document
             .getElementById('give-up')
+            .disabled = true;
+
+        document
+            .getElementById('new-game')
             .disabled = false;
     })
 });
