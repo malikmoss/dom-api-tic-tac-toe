@@ -3,6 +3,7 @@ let currentPlayerSymbol = "X"
 let squareValues =  ["","","","","","","","",""]
 let gameStatus = ''
 
+//for every time the game state changes, we call this to save the game state
 function saveGameState() {
     const state = {
         currentPlayerSymbol,
@@ -10,18 +11,20 @@ function saveGameState() {
         gameStatus
     }
     window.localStorage.setItem(key, JSON.stringify(state));
-
 }
 
+//we call this when the dom Ccontent is loaded
 function loadGameState() {
     const savedState = window.localStorage.getItem(key);
     if (savedState === null) return;
 
+ // pulling out values from stored stated and setting them on values below   
     const state = JSON.parse(savedState);
     currentPlayerSymbol = state.currentPlayerSymbol;
     squareValues = state.squareValues;
     gameStatus = state.gameStatus;
 
+    //update status on each of boards squares based on values in sqaure values array
     for(let i = 0; i < 9; i++) {
         if (squareValues !== '') {
             const img = document.createElement('img');
@@ -31,6 +34,8 @@ function loadGameState() {
                 .appendChild(img)
         }
     }
+
+    //updating status of remaining elements 
     if (gameStatus !== '') {
         document
             .getElementById('game-status')
@@ -45,16 +50,16 @@ function loadGameState() {
             .disabled = true;
     } else {
         document
-        .getElementById('game-status')
-        .innerHTML = '';
+            .getElementById('game-status')
+            .innerHTML = '';
 
-    document
-        .getElementById('new-game')
-        .disabled = true;
+        document
+            .getElementById('new-game')
+            .disabled = true;
 
-    document
-        .getElementById('give-up')
-        .disabled = false; 
+        document
+            .getElementById('give-up')
+            .disabled = false; 
     }
 }
 
