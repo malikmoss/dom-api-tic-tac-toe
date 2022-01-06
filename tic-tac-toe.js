@@ -1,7 +1,50 @@
+const key = 'tic-tac-toe-game-state'
 let currentPlayerSymbol = "X"
-                    //s0 s1 s2...            s8
 let squareValues =  ["","","","","","","","",""]
 let gameStatus = ''
+
+function saveGameStatus() {
+    const state = {
+        currentPlayerSymbol,
+        squareValues,
+        gameStatus
+    }
+    window.localStorage.setItem(key, JSON.stringify(state));
+
+}
+
+function localGameState() {
+    const savedState = window.localStorage.getItem(key);
+    if (savedState === null) return;
+
+    const state = JSON.parse(savedState);
+    currentPlayerSymbol = state.currentPlayerSymbol;
+    squareValues = state.squareValues;
+    gameStatus = state.gameStatus;
+
+    for(let i = 0; i < 9; i++) {
+        if (squareValues !== '') {
+            const img = document.createElement('img');
+            img.src = `../player-${squareValues[i]}.svg`
+            document
+                .getElementById(`square-${i}`)
+                .appendChild(img)
+        }
+    }
+    if (gameStatus !== '') {
+        document
+            .getElementById('game-status')
+            .innerHTML = `Winner: ${gameStatus.toUpperCase()}`;
+
+        document
+            .getElementById('new-game')
+            .disabled = false;
+
+        document
+            .getElementById('give-up')
+            .disabled = true;
+    }
+}
 
 function checkGameStatus() {
 
